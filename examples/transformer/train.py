@@ -35,8 +35,8 @@ from absl import app
 from absl import flags
 from absl import logging
 import haiku as hk
-from examples.transformer import dataset
-from examples.transformer import model
+from ...examples.transformer import dataset
+from ...examples.transformer import model
 import jax
 import jax.numpy as jnp
 import numpy as np
@@ -177,6 +177,7 @@ def main(_):
       prev_time = time.time()
       metrics |= {'steps_per_sec': steps_per_sec}
       logging.info({k: float(v) for k, v in metrics.items()})
+    break
 
 
 if __name__ == '__main__':

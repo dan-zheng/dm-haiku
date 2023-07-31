@@ -21,7 +21,7 @@ from absl import flags
 from absl import logging
 
 import haiku as hk
-from examples.rnn import dataset
+from ...examples.rnn import dataset
 import jax
 from jax import lax
 import jax.numpy as jnp
@@ -159,6 +159,7 @@ def main(_):
     train_batch = next(train_data)
     state = update(state, train_batch)
 
+    break
     # Periodically generate samples.
     if step % SAMPLING_INTERVAL.value == 0:
       context = train_batch['input'][:, 0]  # First element of training batch.
@@ -184,5 +185,7 @@ def main(_):
         })
 
 
+print(__file__)
+print(__name__)
 if __name__ == '__main__':
   app.run(main)

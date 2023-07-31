@@ -30,6 +30,8 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 
+from pynsy.type_inference import tensor_shape_inference
+
 
 def _layer_norm(x: jax.Array) -> jax.Array:
   """Applies a unique LayerNorm to `x` with default settings."""
@@ -105,6 +107,8 @@ class LanguageModel(hk.Module):
       self,
       tokens: jax.Array,  # Batch of sequences of input tokens, shape [B, T].
   ) -> jax.Array:  # Batch of sequences of output token logits, shape [B, T, V].
+    tensor_shape_inference.annotate_shape(tokens, ('B', 'T'))
+
     """Forward pass, producing a sequence of logits."""
     input_mask = jnp.greater(tokens, self.pad_token)
     unused_batch_size, seq_len = tokens.shape
@@ -122,4 +126,6 @@ class LanguageModel(hk.Module):
     embeddings = self.transformer(input_embeddings, input_mask)  # [B, T, D]
 
     # Decode the embeddings (here, we use untied weights).
-    return hk.Linear(self.vocab_size)(embeddings)  # [B, T, V]
+    result = hk.Linear(self.vocab_size)(embeddings)  # [B, T, V]
+    # shape_inference.annotate_shape(result, ('B', 'T', 'V'))
+    return result

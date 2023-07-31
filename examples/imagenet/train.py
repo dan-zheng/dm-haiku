@@ -23,7 +23,7 @@ from absl import app
 from absl import flags
 from absl import logging
 import haiku as hk
-from examples.imagenet import dataset
+from ...examples.imagenet import dataset
 import jax
 import jax.numpy as jnp
 import jmp

@@ -16,10 +16,10 @@
 
 from absl.testing import absltest
 from bsuite.environments import catch
-from examples.impala import actor as actor_lib
-from examples.impala import agent as agent_lib
-from examples.impala import haiku_nets
-from examples.impala import learner as learner_lib
+from ...examples.impala import actor as actor_lib
+from ...examples.impala import agent as agent_lib
+from ...examples.impala import haiku_nets
+from ...examples.impala import learner as learner_lib
 import jax
 import optax
 

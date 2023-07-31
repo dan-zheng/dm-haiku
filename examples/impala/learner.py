@@ -23,8 +23,8 @@ import warnings
 
 import dm_env
 import haiku as hk
-from examples.impala import agent as agent_lib
-from examples.impala import util
+from ...examples.impala import agent as agent_lib
+from ...examples.impala import util
 import jax
 from jax.example_libraries import optimizers
 import jax.numpy as jnp
